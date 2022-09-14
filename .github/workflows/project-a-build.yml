@@ -24,11 +24,11 @@ jobs:
           echo "Printing github base ref"
           echo ${{ github.base_ref }}
       - name: Determine base main
-        if: github.event_name ==  'push' && github.ref_name == 'main'
+        if: github.event_name == 'push' && github.ref_name == 'main'
         run: |
           echo "MY_CUSTOM_BASE=main" >> $GITHUB_ENV
           echo "Printing custom base"
-          echo ${{ env.MY_CUSTOM_BASE }}
+          echo "${{ env.MY_CUSTOM_BASE }}"
       - uses: dorny/paths-filter@v2
         id: changes
         with:
