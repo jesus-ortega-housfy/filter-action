@@ -1,9 +1,9 @@
 name: project-b-build.yml
 on:
   pull_request:
-    branches: [pre, master]
+    branches: [pre, main]
   push:
-    branches: [pre, master]
+    branches: [pre, main]
   workflow_dispatch:
 #No more than 1 concurrent job
 concurrency: project-b-build.yml-${{ github.ref }}
