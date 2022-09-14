@@ -1,9 +1,9 @@
 name: project-a-build
 on:
   pull_request:
-    branches: [pre, master]
+    branches: [pre, main]
   push:
-    branches: [pre, master]
+    branches: [pre, main]
   workflow_dispatch:
 #No more than 1 concurrent job
 concurrency: project-a-build-${{ github.ref }}
