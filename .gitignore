@@ -1,0 +1,19 @@
+# PHPStorm project dir
+/.idea
+
+# Vagrant
+/.vagrant
+
+# mac hidden field
+.DS_Store
+
+# Laravel project directories and files
+_ide_helper.php
+.phpstorm.meta.php
+.http-client.env.json
+
+# Temp dir
+tmp
+
+# Terraform
+.terraform

@@ -1,0 +1,42 @@
+name: project-a-build
+on:
+  pull_request:
+    branches: [pre, master]
+  push:
+    branches: [pre, master]
+  workflow_dispatch:
+#No more than 1 concurrent job
+concurrency: project-a-build-${{ github.ref }}
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      project-path: ${{ steps.set-outputs.outputs.project-path }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Printing base
+        run: |
+          env
+          echo "Printing github base ref"
+          echo ${{ github.base_ref }}
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            project-path:
+             - 'project-a/**'
+      - name: Set outputs
+        id: set-outputs
+        run: >
+          echo ::set-output name=project-path::${{ steps.changes.outputs.project-path }}
+
+  my-custom-task:
+    name: My Custom task
+    runs-on: ubuntu-latest
+    needs: changes
+    if: needs.changes.outputs.project-path == 'true'
+    steps:
+      - name: Custom step
+        run: |
+          echo "This will only be printed if the path is set to true"
